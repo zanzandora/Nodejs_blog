@@ -35,6 +35,9 @@ const viewsPath = join(
 );
 app.set('views', viewsPath);
 
+// *Set static path
+const publicPath = join(dirname(fileURLToPath(import.meta.url)), 'public');
+app.use(express.static(publicPath));
 // routes init
 router(app);
 

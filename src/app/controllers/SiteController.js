@@ -1,13 +1,10 @@
 import Article from '../models/Article.js';
 class SiteController {
-  async index(req, res) {
-    try {
-      const Articles = await Article.find({});
-      res.json(Articles);
-    } catch (err) {
-      res.status(400).json({ error: 'error!' });
-    }
-    // res.render('home');
+  async index(req, res, next) {
+    Article.find({})
+      .lean()
+      .then((Articles) => res.render('home', { Articles }))
+      .catch((err) => next(err));
   }
 
   login(req, res) {
